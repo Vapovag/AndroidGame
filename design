@@ -1,0 +1,12 @@
+#: import rgba kivy.utils.rgba
+
+<MainWindow>
+    orientation: "vertical"
+    canvas.before:
+        Color:
+            rgba: [1, 1, 1, 1]
+        Rectangle:
+            pos = self.pos
+            size = self.size
+    ScreenManager:
+        id: scrn_mngr:

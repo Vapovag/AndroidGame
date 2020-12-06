@@ -1,0 +1,166 @@
+#: import utils kivy.utils
+#: import MDIconButton kivymd.uix.button.MDIconButton
+WindowManager:
+    MainWindow:
+    SecondWindow:
+    ThirdWindow:
+
+<MainWindow>:
+    name: "main"
+    FloatLayout:
+        canvas.before:
+            Color:
+                rgb: 255/255, 208/255, 0/255, 1
+            Rectangle:
+                size: self.size
+                pos: self.pos
+        Image:
+            source: "Sprites/logo.png"
+            opacity: 0.5
+            pos_hint: {"center_y":0.33}
+        RoundedButton:
+            text: "Prochains cours"
+            font_size: 30
+            color: 255/255, 208/255, 0/255, 1
+            size_hint: 0.8, 0.15
+            pos_hint: {"center_x":0.5, "center_y":0.85}
+            on_release:
+                app.root.current = "second"
+                root.manager.transition.direction = "left"
+        RoundedButton:
+            text: "<button_to_code>"
+            font_size: 30
+            color: 255/255, 208/255, 0/255, 1
+            size_hint: 0.8, 0.15
+            pos_hint: {"center_x":0.5, "center_y":0.65}
+            on_release:
+                app.root.current = "third"
+                root.manager.transition.direction = "left"
+
+<SecondWindow>:
+    name: "second"
+    FloatLayout:
+        canvas:
+            Color:
+                rgb: 255/255, 208/255, 0, 1
+            Rectangle:
+                size: self.size
+                pos: self.pos
+        Label:
+            color: 1, 1, 1, 1
+            pos_hint: {"center_y":0.92}
+            text: "PROCHAINS "
+            font_name: "Barlow/Barlow-Bold"
+            font_size: 40
+        Label:
+            color: 1, 1, 1, 1
+            pos_hint: {"center_y":0.85}
+            text: "COURS"
+            font_name: "Barlow/Barlow-ExtraBold"
+            font_size: 40
+
+        FloatLayout:
+            pos_hint: {"top":0.77, "x":0.1}
+            size_hint: 0.8, 0.18
+            color: 1, 1, 1, 1
+            canvas:
+                Color:
+                    rgb: 1, 1, 1, 1
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+                Color:
+                    rgb: utils.get_color_from_hex(root.getColor(root.findClass()[0])[0])
+                Rectangle:
+                    size: [20, root.height*0.18]
+                    pos: self.pos
+            Label:
+                text: root.findClass()[0].nom
+                font_name: "Barlow/Barlow-SemiBold"
+                font_size: 25
+                pos_hint: {"center_x":0.5, "center_y":0.75}
+                color: 255/255, 208/255, 0, 1
+            Label:
+                text: root.findClass()[0].prof
+                font_size: 20
+                pos_hint: {"center_x":0.5, "center_y":0.25}
+                color: 255/255, 208/255, 0, 1
+            Label:
+                text: root.findClass()[0].salle
+                font_size: 18
+                pos_hint: {"center_x":0.5, "center_y":0.5}
+                color: 255/255, 208/255, 0, 1
+
+        FloatLayout:
+            pos_hint: {"top":0.55, "x":0.1}
+            size_hint: 0.8, 0.18
+            color: 1, 1, 1, 1
+            canvas:
+                Color:
+                    rgb: 1, 1, 1, 1
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+                Color:
+                    rgb: utils.get_color_from_hex(root.getColor(root.findClass()[1])[0])
+                Rectangle:
+                    size: [20, root.height*0.18]
+                    pos: self.pos
+            Label:
+                text: root.findClass()[1].nom
+                font_size: 25
+                font_name: "Barlow/Barlow-SemiBold"
+                pos_hint: {"center_x":0.5, "center_y":0.75}
+                color: 255/255, 208/255, 0, 1
+            Label:
+                text: root.findClass()[1].prof
+                font_size: 20
+                pos_hint: {"center_x":0.5, "center_y":0.25}
+                color: 255/255, 208/255, 0, 1
+            Label:
+                text: root.findClass()[1].salle
+                font_size: 18
+                pos_hint: {"center_x":0.5, "center_y":0.5}
+                color: 255/255, 208/255, 0, 1
+
+        RoundedButton:
+            text: "Retour"
+            color: 255/255, 208/255, 0, 1
+            font_size: 30
+            size_hint: 0.8, 0.12
+            pos_hint: {"center_x":0.5, "center_y":0.12}
+            on_release:
+                app.root.current = "main"
+                root.manager.transition.direction = "right"
+
+<ThirdWindow>:
+    name: "third"
+    FloatLayout:
+        canvas:
+            Color:
+                rgb: 255/255, 208/255, 0/255, 1
+            Rectangle:
+                size: self.size
+                pos: self.pos
+        RoundedButton:
+            text: "Retour"
+            color: 255/255, 208/255, 0, 1
+            font_size: 30
+            size_hint: 0.8, 0.12
+            pos_hint: {"center_x":0.5, "center_y":0.1}
+            on_release:
+                app.root.current = "main"
+                root.manager.transition.direction = "right"
+
+<RoundedButton@Button>:
+    background_color: 0,0,0,0  # the last zero is the critical on, make invisible
+    canvas.before:
+        Color:
+            rgba: (1,1,1,1) if self.state=='normal' else (0,.7,.7,1)  # visual feedback of press
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [40,]
+
+<Label>:
+    font_name: "Barlow/Barlow-medium"
